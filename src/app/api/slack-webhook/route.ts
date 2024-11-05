@@ -23,8 +23,8 @@ export async function POST(req: Request) {
       data.event.type === "message" &&
       data.event.channel === process.env.SLACK_CHANNEL_ID
     ) {
-      const message = data.event.text;
-      const user = data.event.user;
+      //const message = data.event.text;
+      //const user = data.event.user;
 
       // 必要な処理をここで行う（例えばデータベースに保存、通知など）
       //console.log(`New message from ${user}: ${message}`);
@@ -32,6 +32,7 @@ export async function POST(req: Request) {
         channel: data.event.channel,
         text: data.event.files.plaintext,
       });
+      console.log(response);
     }
 
     return NextResponse.json({ status: "ok" });
