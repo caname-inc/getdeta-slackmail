@@ -1,5 +1,9 @@
 // src/app/api/slack-webhook/route.js
+import { WebClient } from "@slack/web-api";
 import { NextResponse } from "next/server";
+
+// Slackクライアントの初期化
+const slackClient = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export async function POST(req: Request) {
   try {
@@ -23,7 +27,11 @@ export async function POST(req: Request) {
       const user = data.event.user;
 
       // 必要な処理をここで行う（例えばデータベースに保存、通知など）
-      console.log(`New message from ${user}: ${message}`);
+      //console.log(`New message from ${user}: ${message}`);
+      const response = await slackClient.chat.postMessage({
+        channel: data.event.channel,
+        text: data.event.files.plaintext,
+      });
     }
 
     return NextResponse.json({ status: "ok" });
