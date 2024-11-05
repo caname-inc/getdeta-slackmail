@@ -26,15 +26,17 @@ export async function POST(req: Request) {
       //const message = data.event.text;
       //const user = data.event.user;
 
-      console.log(data.event.files);
+      //console.log(data.event.files);
 
       // 必要な処理をここで行う（例えばデータベースに保存、通知など）
       //console.log(`New message from ${user}: ${message}`);
-      const response = await slackClient.chat.postMessage({
-        channel: data.event.channel,
-        text: data.event.files.plaintext,
-      });
-      console.log(response);
+      if (data.event.files) {
+        const response = await slackClient.chat.postMessage({
+          channel: data.event.channel,
+          text: data.event.files[0].plain_text,
+        });
+        console.log(response);
+      }
     }
 
     return NextResponse.json({ status: "ok" });
