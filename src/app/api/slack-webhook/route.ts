@@ -7,6 +7,11 @@ export async function POST(req: Request) {
 
     console.log("Received Slack webhook:", data);
 
+    if (data.challenge) {
+      // Slackのイベントの検証
+      return NextResponse.json({ challenge: data.challenge });
+    }
+
     // Slackのイベントを確認し、特定のチャンネルのメッセージを処理
     if (
       data.event &&
