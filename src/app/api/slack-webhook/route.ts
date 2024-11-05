@@ -32,11 +32,11 @@ export async function POST(req: Request) {
       //console.log(`New message from ${user}: ${message}`);
 
       const customerName =
-        data.event.files[0].plain_text.match(/^(.*) 様$/)?.[1];
-      const date = data.event.files[0].plain_text.match(/^日時：(.*)$/)?.[1];
-      const store = data.event.files[0].plain_text.match(/^店舗：(.*)$/)?.[1];
+        data.event.files[0].plain_text.match(/^(.*) 様$/m)?.[1];
+      const date = data.event.files[0].plain_text.match(/^日時：(.*)$/m)?.[1];
+      const store = data.event.files[0].plain_text.match(/^店舗：(.*)$/m)?.[1];
       const staff =
-        data.event.files[0].plain_text.match(/^スタッフ：(.*)$/)?.[1];
+        data.event.files[0].plain_text.match(/^スタッフ：(.*)$/m)?.[1];
 
       const res = customerName + "\n" + date + "\n" + store + "\n" + staff;
 
