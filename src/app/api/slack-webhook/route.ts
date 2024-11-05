@@ -5,7 +5,8 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
 
-    console.log("Received Slack webhook:", data);
+    //console.log("Received Slack webhook:", data);
+    console.dir(data, { depth: null });
 
     if (data.challenge) {
       // Slackのイベントの検証
