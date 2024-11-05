@@ -41,16 +41,16 @@ export async function POST(req: Request) {
         data.event.files[0].plain_text.match(/^スタッフ：\s*(.*)$/m)?.[1];
 
       const res =
-        "氏名：" +
+        "氏名　　：" +
         customerName +
         "\n" +
         "予約日時：" +
         date +
         "\n" +
-        "店舗名：" +
+        "店舗名　：" +
         store +
         "\n" +
-        "対応スタッフ：" +
+        "スタッフ：" +
         staff;
 
       if (data.event.files) {
