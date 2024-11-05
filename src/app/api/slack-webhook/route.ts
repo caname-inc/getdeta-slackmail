@@ -26,6 +26,8 @@ export async function POST(req: Request) {
       //const message = data.event.text;
       //const user = data.event.user;
 
+      console.log(data.event.files);
+
       // 必要な処理をここで行う（例えばデータベースに保存、通知など）
       //console.log(`New message from ${user}: ${message}`);
       const response = await slackClient.chat.postMessage({
