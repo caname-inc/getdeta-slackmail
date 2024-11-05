@@ -21,8 +21,10 @@ export async function POST(req: Request) {
     if (
       data.event &&
       data.event.type === "message" &&
-      data.event.channel === process.env.SLACK_CHANNEL_ID
+      data.event.channel === process.env.SLACK_CHANNEL_ID_SUBSCRIPTION
     ) {
+      const channel_post = process.env.SLACK_CHANNEL_ID_POST ?? "";
+
       //const message = data.event.text;
       //const user = data.event.user;
 
@@ -55,7 +57,7 @@ export async function POST(req: Request) {
 
       if (data.event.files) {
         const response = await slackClient.chat.postMessage({
-          channel: data.event.channel,
+          channel: channel_post,
           text: res,
         });
         console.log(response);
