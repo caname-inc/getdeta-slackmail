@@ -30,10 +30,20 @@ export async function POST(req: Request) {
 
       // 必要な処理をここで行う（例えばデータベースに保存、通知など）
       //console.log(`New message from ${user}: ${message}`);
+
+      const customerName =
+        data.event.files[0].plain_text.match(/^(.*) 様$/)?.[1];
+      const date = data.event.files[0].plain_text.match(/^日時：(.*)$/)?.[1];
+      const store = data.event.files[0].plain_text.match(/^店舗：(.*)$/)?.[1];
+      const staff =
+        data.event.files[0].plain_text.match(/^スタッフ：(.*)$/)?.[1];
+
+      const res = customerName + "\n" + date + "\n" + store + "\n" + staff;
+
       if (data.event.files) {
         const response = await slackClient.chat.postMessage({
           channel: data.event.channel,
-          text: data.event.files[0].plain_text,
+          text: res,
         });
         console.log(response);
       }
