@@ -1,0 +1,22 @@
+// src/app/api/slack-webhook/route.js
+import { NextResponse } from 'next/server';
+
+export async function POST(req: Request) {
+    try {
+        const data = await req.json();
+
+        // Slackのイベントを確認し、特定のチャンネルのメッセージを処理
+        if (data.event && data.event.type === 'message' && data.event.channel === process.env.SLACK_CHANNEL_ID) {
+            const message = data.event.text;
+            const user = data.event.user;
+            
+            // 必要な処理をここで行う（例えばデータベースに保存、通知など）
+            console.log(`New message from ${user}: ${message}`);
+        }
+
+        return NextResponse.json({ status: 'ok' });
+    } catch (error: any) {
+        console.error('Error processing Slack webhook:', error);
+        return NextResponse.json({ status: 'error', error: error.message }, { status: 500 });
+    }
+}
