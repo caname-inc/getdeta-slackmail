@@ -1,3 +1,8 @@
 {
-    "workbench.sideBar.location": "right"
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // フォーマッターをPrettierにする
+  "editor.formatOnSave": true, // ファイル保存時にフォーマットを実行
+  "editor.tabSize": 2, // タブのサイズを2にする
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  }
 }
