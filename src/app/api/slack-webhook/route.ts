@@ -40,7 +40,18 @@ export async function POST(req: Request) {
       const staff =
         data.event.files[0].plain_text.match(/^スタッフ：\s*(.*)$/m)?.[1];
 
-      const res = customerName + "\n" + date + "\n" + store + "\n" + staff;
+      const res =
+        "氏名：" +
+        customerName +
+        "\n" +
+        "予約日時：" +
+        date +
+        "\n" +
+        "店舗名：" +
+        store +
+        "\n" +
+        "対応スタッフ：" +
+        staff;
 
       if (data.event.files) {
         const response = await slackClient.chat.postMessage({
